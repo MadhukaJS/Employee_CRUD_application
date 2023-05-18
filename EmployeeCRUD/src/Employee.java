@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.*;
 
 public class Employee {
     private JPanel main;
@@ -22,12 +23,37 @@ public class Employee {
         frame.setVisible(true);
     }
 
+    //database connection
+
+    Connection con;
+    PreparedStatement pst;
+    public void connect(){
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            con=DriverManager.getConnection("jdbc:mysql://localhost/rbcompany","root","");
+            System.out.println("successfully connected!");
+        }
+        catch(ClassNotFoundException ex){
+            System.out.println("error");
+        }
+        catch (SQLException ex){
+            System.out.println("error");
+        }
+    }
+
+
+
+
+
     public Employee() {
+
+        connect();
     saveButton.addActionListener(new ActionListener() {
+
         @Override
         public void actionPerformed(ActionEvent e) {
 
         }
     });
-}
+    }
 }
