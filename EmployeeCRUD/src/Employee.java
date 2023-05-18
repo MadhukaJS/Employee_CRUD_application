@@ -34,9 +34,12 @@ public class Employee {
             System.out.println("successfully connected!");
         }
         catch(ClassNotFoundException ex){
+            ex.printStackTrace();
             System.out.println("error");
+
         }
         catch (SQLException ex){
+            ex.printStackTrace();
             System.out.println("error");
         }
     }
@@ -52,6 +55,32 @@ public class Employee {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+
+            String empName,sallary,mobile;
+
+            empName=txtName.getText();
+            sallary=txtSallary.getText();
+            mobile=txtMobile.getText();
+
+            try{
+                pst=con.prepareStatement("insert into employee(empName,sallary,mobile)values (?,?,?)");
+                pst.setString(1,empName);
+                pst.setString(2,sallary);
+                pst.setString(3,mobile);
+
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null,"Saves successfully");
+
+                txtName.setText("");
+                txtSallary.setText("");
+                txtMobile.setText("");
+                txtName.requestFocus();
+
+
+
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
 
         }
     });
