@@ -1,10 +1,12 @@
+import net.proteanit.sql.DbUtils;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 
 public class Employee {
-    private JPanel main;
+    private JPanel MAIN;
     private JTextField txtName;
     private JTextField txtSallary;
     private JTextField txtMobile;
@@ -14,10 +16,11 @@ public class Employee {
     private JButton deleteButton;
     private JButton searchButton;
     private JTextField txtId;
+    private JScrollPane Table_1;
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Employee");
-        frame.setContentPane(new Employee().main);
+        frame.setContentPane(new Employee().MAIN);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
@@ -83,6 +86,31 @@ public class Employee {
             }
 
         }
+
+        //table
+
+        void table_load(){
+            try{
+                pst= con.prepareStatement("select * from employee");
+                ResultSet rs= pst.executeQuery();
+                table1.setModel(DbUtils.resultSetToTableModel(rs));
+            }
+            catch(SQLException e){
+                e.printStackTrace();
+            }
+        }
     });
+        updateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 }
