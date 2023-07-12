@@ -94,6 +94,7 @@ public class Employee {
                 txtSallary.setText("");
                 txtMobile.setText("");
                 txtName.requestFocus();
+                table_load();
 
 
 
